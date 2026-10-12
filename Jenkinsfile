@@ -5,11 +5,10 @@ pipeline {
     stages {
 
         stage('Install Dependencies') {
-            steps {
-                sh 'python3 -m pip install -r requirements.txt'
-            }
-        }
-
+    steps {
+        sh '/Library/Frameworks/Python.framework/Versions/3.13/bin/python3 -m pip install -r requirements.txt'
+    }
+}
         stage('Run Tests') {
             steps {
                 sh 'pytest -v'
