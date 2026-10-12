@@ -1,14 +1,20 @@
 pipeline {
-
     agent any
 
     stages {
 
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
         stage('Install Dependencies') {
-    steps {
-        sh '/Library/Frameworks/Python.framework/Versions/3.13/bin/python3 -m pip install -r requirements.txt'
-    }
-}
+            steps {
+                sh '/Library/Frameworks/Python.framework/Versions/3.13/bin/python3 -m pip install -r requirements.txt'
+            }
+        }
+
         stage('Run Tests') {
             steps {
                 sh '/Library/Frameworks/Python.framework/Versions/3.13/bin/python3 -m pytest -v'
@@ -16,20 +22,20 @@ pipeline {
         }
 
         stage('Build Docker Image') {
-    steps {
-        sh 'PATH="/Applications/Docker.app/Contents/Resources/bin:/usr/local/bin:$PATH" /usr/local/bin/docker build -t student-management-cicd .'
-    }
-}
+            steps {
+                sh 'PATH="/Applications/Docker.app/Contents/Resources/bin:/usr/local/bin:$PATH" /usr/local/bin/docker build -t student-management-cicd .'
+            }
+        }
 
         stage('Deploy') {
-    steps {
-        sh 'PATH="/Applications/Docker.app/Contents/Resources/bin:/usr/local/bin:$PATH" /usr/local/bin/docker rm -f student-management-app || true'
-        sh 'PATH="/Applications/Docker.app/Contents/Resources/bin:/usr/local/bin:$PATH" /usr/local/bin/docker run -d --name student-management-app -p 5001:5000 student-management-cicd'
+            steps {
+                sh 'PATH="/Applications/Docker.app/Contents/Resources/bin:/usr/local/bin:$PATH" /usr/local/bin/docker rm -f student-management-app || true'
+                sh 'PATH="/Applications/Docker.app/Contents/Resources/bin:/usr/local/bin:$PATH" /usr/local/bin/docker run -d --name student-management-app -p 5001:5000 student-management-cicd'
+            }
+        }
     }
-}
 
     post {
-
         success {
             echo 'CI/CD Pipeline completed successfully!'
         }
