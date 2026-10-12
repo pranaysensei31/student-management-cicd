@@ -16,18 +16,17 @@ pipeline {
         }
 
         stage('Build Docker Image') {
-            steps {
-                sh '/usr/local/bin/docker build -t student-management-cicd .'
-            }
-        }
+    steps {
+        sh 'PATH="/Applications/Docker.app/Contents/Resources/bin:/usr/local/bin:$PATH" /usr/local/bin/docker build -t student-management-cicd .'
+    }
+}
 
         stage('Deploy') {
-            steps {
-                sh '/usr/local/bin/docker rm -f student-management-app || true'
-                sh '/usr/local/bin/docker run -d --name student-management-app -p 5001:5000 student-management-cicd'
-            }
-        }
+    steps {
+        sh 'PATH="/Applications/Docker.app/Contents/Resources/bin:/usr/local/bin:$PATH" /usr/local/bin/docker rm -f student-management-app || true'
+        sh 'PATH="/Applications/Docker.app/Contents/Resources/bin:/usr/local/bin:$PATH" /usr/local/bin/docker run -d --name student-management-app -p 5001:5000 student-management-cicd'
     }
+}
 
     post {
 
