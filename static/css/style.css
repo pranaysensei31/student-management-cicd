@@ -1,0 +1,433 @@
+/* ================================
+   StudentHub - Main Styles
+   ================================ */
+
+   * {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    background: #f4f7fb;
+    color: #17213a;
+}
+
+/* ================================
+   SIDEBAR
+   ================================ */
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 260px;
+    height: 100vh;
+    background: linear-gradient(180deg, #111a35 0%, #172650 100%);
+    color: white;
+    padding: 28px 18px;
+    z-index: 1000;
+    overflow-y: auto;
+}
+
+.logo {
+    font-size: 27px;
+    font-weight: 800;
+    margin: 0 0 45px 12px;
+    color: white;
+}
+
+.logo span {
+    color: #635bff;
+}
+
+.sidebar a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 15px 16px;
+    margin-bottom: 8px;
+    border-radius: 11px;
+    color: #d7def0;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+    transition: 0.2s ease;
+}
+
+.sidebar a:hover {
+    background: rgba(99, 91, 255, 0.18);
+    color: white;
+}
+
+.sidebar a.active {
+    background: linear-gradient(
+        135deg,
+        #37348f,
+        #302c79
+    );
+    color: white;
+}
+
+.sidebar-footer {
+    position: absolute;
+    left: 18px;
+    right: 18px;
+    bottom: 20px;
+    padding: 18px;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 14px;
+    color: #cbd3e8;
+    font-size: 13px;
+}
+
+.sidebar-footer strong {
+    color: white;
+    font-size: 14px;
+}
+
+/* ================================
+   MAIN CONTENT
+   ================================ */
+
+.main-content {
+    margin-left: 260px;
+    min-height: 100vh;
+    width: calc(100% - 260px);
+}
+
+/* ================================
+   TOP BAR
+   ================================ */
+
+.topbar {
+    height: 75px;
+    background: white;
+    border-bottom: 1px solid #e5e9f2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 35px;
+}
+
+.search-box {
+    width: 440px;
+    max-width: 55%;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 13px 18px;
+    border: none;
+    border-radius: 12px;
+    background: #f0f4fa;
+    outline: none;
+    font-size: 15px;
+}
+
+.topbar-btn {
+    background: #5b55e8;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 9px;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.topbar-btn:hover {
+    background: #4943d0;
+    color: white;
+}
+
+/* ================================
+   PAGE
+   ================================ */
+
+.page {
+    padding: 38px 35px 50px;
+}
+
+.page-header {
+    margin-bottom: 30px;
+}
+
+.page-header h1 {
+    margin: 0;
+    font-size: 36px;
+    font-weight: 800;
+    color: #17213a;
+}
+
+.page-header p {
+    margin-top: 7px;
+    color: #70809b;
+    font-size: 16px;
+}
+
+/* ================================
+   STAT CARDS
+   ================================ */
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 22px;
+    margin-bottom: 25px;
+}
+
+.stat-card {
+    background: white;
+    border-radius: 20px;
+    padding: 24px;
+    min-height: 145px;
+    box-shadow: 0 7px 25px rgba(31, 45, 80, 0.06);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.stat-card h3 {
+    margin: 0 0 12px;
+    color: #71809a;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.stat-card .value {
+    font-size: 32px;
+    font-weight: 800;
+    color: #17213a;
+}
+
+.stat-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    background: #eef1ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 23px;
+}
+
+/* ================================
+   CHART GRID
+   ================================ */
+
+.charts-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1fr;
+    gap: 22px;
+    margin-bottom: 25px;
+}
+
+.chart-card {
+    background: white;
+    border-radius: 20px;
+    padding: 22px;
+    min-height: 350px;
+    box-shadow: 0 7px 25px rgba(31, 45, 80, 0.06);
+}
+
+.chart-card h2 {
+    margin: 0 0 20px;
+    font-size: 18px;
+    color: #17213a;
+}
+
+.chart-container {
+    position: relative;
+    height: 275px;
+    width: 100%;
+}
+
+/* ================================
+   RECENT STUDENTS
+   ================================ */
+
+.recent-card {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 7px 25px rgba(31, 45, 80, 0.06);
+    overflow: hidden;
+}
+
+.recent-header {
+    padding: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #edf0f5;
+}
+
+.recent-header h2 {
+    margin: 0;
+    font-size: 20px;
+}
+
+.recent-header p {
+    margin: 6px 0 0;
+    color: #7b879c;
+}
+
+.view-all {
+    color: white;
+    background: #5b55e8;
+    padding: 10px 17px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.view-all:hover {
+    background: #4943d0;
+    color: white;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    text-align: left;
+    padding: 15px 22px;
+    color: #71809a;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    background: #fafbfc;
+}
+
+td {
+    padding: 16px 22px;
+    border-top: 1px solid #edf0f5;
+    font-size: 14px;
+}
+
+.student-name {
+    font-weight: 700;
+    color: #17213a;
+}
+
+.cgpa {
+    display: inline-block;
+    padding: 7px 11px;
+    background: #dff8e8;
+    color: #168348;
+    border-radius: 8px;
+    font-weight: 700;
+}
+
+/* ================================
+   BUTTONS
+   ================================ */
+
+.btn-primary-custom {
+    display: inline-block;
+    background: #5b55e8;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 9px;
+    border: none;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.btn-primary-custom:hover {
+    background: #4943d0;
+    color: white;
+}
+
+/* ================================
+   RESPONSIVE
+   ================================ */
+
+@media (max-width: 1200px) {
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .charts-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .chart-card:first-child {
+        grid-column: span 2;
+    }
+}
+
+@media (max-width: 800px) {
+
+    .sidebar {
+        width: 220px;
+    }
+
+    .main-content {
+        margin-left: 220px;
+        width: calc(100% - 220px);
+    }
+
+    .page {
+        padding: 25px 20px;
+    }
+
+    .charts-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .chart-card:first-child {
+        grid-column: auto;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .topbar {
+        padding: 0 20px;
+    }
+
+    .search-box {
+        max-width: 60%;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+    }
+
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .sidebar-footer {
+        position: relative;
+        left: auto;
+        right: auto;
+        bottom: auto;
+        margin-top: 20px;
+    }
+
+    .topbar {
+        height: auto;
+        padding: 15px;
+        gap: 12px;
+    }
+
+    .search-box {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .page-header h1 {
+        font-size: 28px;
+    }
+}

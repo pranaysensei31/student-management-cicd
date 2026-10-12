@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Login | StudentHub</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+
+            font-family:
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #111a35,
+                    #1d2d5c
+                );
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: #17213a;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 430px;
+            padding: 25px;
+        }
+
+        .login-card {
+            background: white;
+            border-radius: 20px;
+            padding: 42px 38px;
+
+            box-shadow:
+                0 25px 60px rgba(0, 0, 0, 0.25);
+        }
+
+        .logo {
+            width: 58px;
+            height: 58px;
+
+            margin: 0 auto 20px;
+
+            border-radius: 16px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #4f7cff,
+                    #6d5dfc
+                );
+
+            color: white;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 25px;
+            font-weight: 700;
+        }
+
+        h1 {
+            text-align: center;
+            margin: 0;
+
+            font-size: 28px;
+            color: #17213a;
+        }
+
+        .subtitle {
+            text-align: center;
+
+            margin: 8px 0 30px;
+
+            color: #7b8499;
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+
+            margin-bottom: 8px;
+
+            font-size: 14px;
+            font-weight: 600;
+
+            color: #39445c;
+        }
+
+        input {
+            width: 100%;
+
+            padding: 13px 15px;
+
+            border: 1px solid #dce2ec;
+            border-radius: 10px;
+
+            font-size: 15px;
+
+            outline: none;
+
+            transition: 0.2s;
+        }
+
+        input:focus {
+            border-color: #5b6dfb;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(91, 109, 251, 0.12);
+        }
+
+        .login-btn {
+            width: 100%;
+
+            border: none;
+            border-radius: 10px;
+
+            padding: 14px;
+
+            margin-top: 5px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #4f7cff,
+                    #6d5dfc
+                );
+
+            color: white;
+
+            font-size: 15px;
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-1px);
+
+            box-shadow:
+                0 8px 20px
+                rgba(79, 124, 255, 0.3);
+        }
+
+        .error {
+            background: #fff0f0;
+
+            color: #d64545;
+
+            border: 1px solid #ffd1d1;
+
+            border-radius: 9px;
+
+            padding: 11px 13px;
+
+            margin-bottom: 20px;
+
+            font-size: 13px;
+
+            text-align: center;
+        }
+
+        .footer {
+            text-align: center;
+
+            margin-top: 25px;
+
+            color: #9aa3b5;
+
+            font-size: 12px;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <div class="login-container">
+
+        <div class="login-card">
+
+            <div class="logo">
+                S
+            </div>
+
+            <h1>Welcome Back</h1>
+
+            <p class="subtitle">
+                Sign in to StudentHub
+            </p>
+
+
+            {% if error %}
+
+            <div class="error">
+                {{ error }}
+            </div>
+
+            {% endif %}
+
+
+            <form method="POST"
+                  action="{{ url_for('login') }}">
+
+                <div class="form-group">
+
+                    <label for="username">
+                        Username
+                    </label>
+
+                    <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        placeholder="Enter your username"
+                        required
+                        autofocus
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Enter your password"
+                        required
+                    >
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="login-btn">
+
+                    Sign In
+
+                </button>
+
+            </form>
+
+
+            <div class="footer">
+                Student Management System
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

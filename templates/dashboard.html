@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>StudentHub | Dashboard</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+
+<body>
+
+
+<!-- ========================= -->
+<!-- SIDEBAR -->
+<!-- ========================= -->
+
+<div class="sidebar">
+
+    <div class="logo">
+        🎓 <span>Student<span class="logo-purple">Hub</span></span>
+    </div>
+
+
+    <div class="sidebar-menu">
+
+        <a
+            href="/"
+            class="sidebar-link active"
+        >
+            🏠 Dashboard
+        </a>
+
+
+        <a
+            href="/students"
+            class="sidebar-link"
+        >
+            👥 All Students
+        </a>
+
+
+        <a
+            href="/add"
+            class="sidebar-link"
+        >
+            ➕ Add Student
+        </a>
+
+
+        <a
+        href="/analytics"
+        class="sidebar-link"
+    >
+        📊 Analytics
+    </a>
+    
+    <a
+        href="{{ url_for('logout') }}"
+        class="sidebar-link"
+        style="margin-top: 20px; color: #ffb4b4;"
+    >
+        🚪 Logout
+    </a>
+    
+    </div>
+
+
+    <div class="sidebar-footer">
+
+        <strong>Student Management System</strong>
+
+        <br>
+
+        <small>
+            Built with Flask, SQLite & Chart.js
+        </small>
+
+    </div>
+
+</div>
+
+
+
+<!-- ========================= -->
+<!-- MAIN CONTENT -->
+<!-- ========================= -->
+
+<div class="main-content">
+
+
+    <!-- TOP BAR -->
+
+    <div class="topbar">
+
+        <input
+            type="text"
+            class="search-box"
+            placeholder="Search students, departments, or roll numbers..."
+        >
+
+
+        <a
+            href="/students"
+            class="top-button"
+        >
+            View All Students →
+        </a>
+
+    </div>
+
+
+
+    <!-- PAGE -->
+
+    <div class="page">
+
+
+        <div class="page-header">
+
+            <h1>Dashboard</h1>
+
+            <p>
+                Student Management System Overview
+            </p>
+
+        </div>
+
+
+
+        <!-- ========================= -->
+        <!-- STAT CARDS -->
+        <!-- ========================= -->
+
+        <div class="stats-grid">
+
+
+            <div class="stat-card">
+
+                <div>
+
+                    <p>Total Students</p>
+
+                    <h2>
+                        {{ total_students }}
+                    </h2>
+
+                </div>
+
+                <div class="stat-icon">
+                    👥
+                </div>
+
+            </div>
+
+
+
+            <div class="stat-card">
+
+                <div>
+
+                    <p>Average CGPA</p>
+
+                    <h2>
+                        {{ avg_cgpa }}
+                    </h2>
+
+                </div>
+
+                <div class="stat-icon">
+                    📈
+                </div>
+
+            </div>
+
+
+
+            <div class="stat-card">
+
+                <div>
+
+                    <p>Departments</p>
+
+                    <h2>
+                        {{ total_departments }}
+                    </h2>
+
+                </div>
+
+                <div class="stat-icon">
+                    🏫
+                </div>
+
+            </div>
+
+
+
+            <div class="stat-card">
+
+                <div>
+
+                    <p>Academic Years</p>
+
+                    <h2>
+                        {{ academic_years }}
+                    </h2>
+
+                </div>
+
+                <div class="stat-icon">
+                    🎓
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ========================= -->
+        <!-- CHARTS -->
+        <!-- ========================= -->
+
+        <div class="charts-grid">
+
+
+            <!-- DEPARTMENT -->
+
+            <div class="chart-card">
+
+                <h3>
+                    Students by Department
+                </h3>
+
+                <div class="chart-container">
+
+                    <canvas id="departmentChart"></canvas>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- YEAR -->
+
+            <div class="chart-card">
+
+                <h3>
+                    Students by Year
+                </h3>
+
+                <div class="chart-container">
+
+                    <canvas id="yearChart"></canvas>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- CGPA -->
+
+            <div class="chart-card">
+
+                <h3>
+                    CGPA Distribution
+                </h3>
+
+                <div class="chart-container">
+
+                    <canvas id="cgpaChart"></canvas>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ========================= -->
+        <!-- RECENT STUDENTS -->
+        <!-- ========================= -->
+
+        <div class="recent-card">
+
+
+            <div class="recent-header">
+
+                <div>
+
+                    <h3>
+                        Recent Students
+                    </h3>
+
+                    <p>
+                        Latest students added to the system
+                    </p>
+
+                </div>
+
+
+                <a
+                    href="/students"
+                    class="view-all"
+                >
+                    View All →
+                </a>
+
+            </div>
+
+
+
+            {% if recent_students %}
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Name</th>
+
+                            <th>Roll Number</th>
+
+                            <th>Department</th>
+
+                            <th>Year</th>
+
+                            <th>CGPA</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        {% for student in recent_students %}
+
+                        <tr>
+
+                            <td>
+                                <strong>
+                                    {{ student["name"] }}
+                                </strong>
+                            </td>
+
+
+                            <td>
+                                {{ student["roll_no"] }}
+                            </td>
+
+
+                            <td>
+
+                                <span class="department-badge">
+                                    {{ student["department"] }}
+                                </span>
+
+                            </td>
+
+
+                            <td>
+                                Year {{ student["year"] }}
+                            </td>
+
+
+                            <td>
+
+                                <span class="cgpa-badge">
+                                    {{ student["cgpa"] }}
+                                </span>
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+            {% else %}
+
+            <div class="empty-state">
+
+                <div>
+                    🎓
+                </div>
+
+                <h3>
+                    No students yet
+                </h3>
+
+                <p>
+                    Add your first student to see data here.
+                </p>
+
+                <a
+                    href="/add"
+                    class="top-button"
+                >
+                    + Add Student
+                </a>
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ========================= -->
+<!-- CHART JAVASCRIPT -->
+<!-- ========================= -->
+
+<script>
+
+    const departmentLabels =
+        JSON.parse('{{ department_labels | safe }}');
+
+    const departmentValues =
+        JSON.parse('{{ department_values | safe }}');
+
+
+    const yearLabels =
+        JSON.parse('{{ year_labels | safe }}');
+
+    const yearValues =
+        JSON.parse('{{ year_values | safe }}');
+
+
+    const cgpaLabels =
+        JSON.parse('{{ cgpa_labels | safe }}');
+
+    const cgpaValues =
+        JSON.parse('{{ cgpa_values | safe }}');
+
+
+    /* =========================
+       DEPARTMENT CHART
+       ========================= */
+
+    new Chart(
+        document.getElementById("departmentChart"),
+        {
+            type: "doughnut",
+
+            data: {
+
+                labels: departmentLabels,
+
+                datasets: [
+                    {
+                        data: departmentValues,
+
+                        backgroundColor: [
+                            "#3b82f6",
+                            "#f43f5e",
+                            "#fb923c",
+                            "#facc15",
+                            "#14b8a6",
+                            "#8b5cf6"
+                        ],
+
+                        borderWidth: 2,
+
+                        borderColor: "#ffffff"
+                    }
+                ]
+
+            },
+
+            options: {
+
+                responsive: true,
+
+                maintainAspectRatio: false,
+
+                plugins: {
+
+                    legend: {
+                        position: "top"
+                    }
+
+                }
+
+            }
+
+        }
+    );
+
+
+    /* =========================
+       YEAR CHART
+       ========================= */
+
+    new Chart(
+        document.getElementById("yearChart"),
+        {
+            type: "bar",
+
+            data: {
+
+                labels: yearLabels,
+
+                datasets: [
+                    {
+                        label: "Students",
+
+                        data: yearValues,
+
+                        backgroundColor: "#93c5fd",
+
+                        borderRadius: 6
+                    }
+                ]
+
+            },
+
+            options: {
+
+                responsive: true,
+
+                maintainAspectRatio: false,
+
+                plugins: {
+
+                    legend: {
+                        display: false
+                    }
+
+                },
+
+                scales: {
+
+                    y: {
+                        beginAtZero: true,
+
+                        ticks: {
+                            precision: 0
+                        }
+                    }
+
+                }
+
+            }
+
+        }
+    );
+
+
+    /* =========================
+       CGPA CHART
+       ========================= */
+
+    new Chart(
+        document.getElementById("cgpaChart"),
+        {
+            type: "bar",
+
+            data: {
+
+                labels: cgpaLabels,
+
+                datasets: [
+                    {
+                        label: "Students",
+
+                        data: cgpaValues,
+
+                        backgroundColor: "#93c5fd",
+
+                        borderRadius: 6
+                    }
+                ]
+
+            },
+
+            options: {
+
+                responsive: true,
+
+                maintainAspectRatio: false,
+
+                plugins: {
+
+                    legend: {
+                        display: false
+                    }
+
+                },
+
+                scales: {
+
+                    y: {
+                        beginAtZero: true,
+
+                        ticks: {
+                            precision: 0
+                        }
+                    }
+
+                }
+
+            }
+
+        }
+    );
+
+</script>
+
+
+</body>
+
+</html>
